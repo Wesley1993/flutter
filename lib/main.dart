@@ -1,6 +1,8 @@
+import 'package:flare_splash_screen/flare_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cases/cases/custom_tabbar.dart';
+import 'package:flutter_cases/widget/custon_button.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +21,12 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demos'),
+      home: SplashScreen.navigate(
+        name: 'intro.flr',
+        next: (context) => MyHomePage(title: 'Flutter cases'),
+        until: () => Future.delayed(Duration(seconds: 5)),
+        startAnimation: '1',
+      ),
     );
   }
 }
@@ -42,16 +49,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         color: Colors.greenAccent,
-//        padding: EdgeInsets.symmetric(horizontal: 10),
         width: MediaQuery.of(context).size.width,
-        child: Wrap(
-          direction: Axis.horizontal,
-          alignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.start,
-          runAlignment: WrapAlignment.spaceBetween,
-          runSpacing: 5,
-          verticalDirection: VerticalDirection.down,
-          children: _demos(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+          child: Wrap(
+            direction: Axis.horizontal,
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.start,
+            runAlignment: WrapAlignment.spaceBetween,
+            runSpacing: 5,
+            verticalDirection: VerticalDirection.down,
+            children: _demos(),
+          ),
         ),
       ),
     );
@@ -59,34 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _demos() {
     return [
-      demoItem('自定义button1', CustomTabBar()),
-      demoItem('自定义button2', CustomTabBar()),
-      demoItem('自定义button3', CustomTabBar()),
-      demoItem('自定义button4', CustomTabBar())
+      CustomBtn(item: CustomTabBar(),value: '自定义tab',)
     ];
-  }
-
-  Widget demoItem(String value, Widget item) {
-    bool flag = false;
-    if (flag) {
-      return Container(
-        child: Text('data'),
-        width: 100,
-        color: Colors.white,
-      );
-    }
-    return InkWell(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => item));
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.all(Radius.circular(10.0))
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-        child: Text(value),
-      ),
-    );
   }
 }

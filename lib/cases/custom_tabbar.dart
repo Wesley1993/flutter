@@ -12,18 +12,41 @@ class _CustomTabBarState extends State<CustomTabBar> {
       appBar: AppBar(
         title: Text('data'),
       ),
-      body:Container(
-        color: Colors.redAccent,
-        child:FlatButton(
-          color: Colors.blue,
-          highlightColor: Colors.blue[700],
-          colorBrightness: Brightness.dark,
-          splashColor: Colors.grey,
-          child: Text("Submit"),
-          shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          onPressed: () {},
-        )  ,
+      body: SafeArea(
+          child: Stack(children: [
+        Positioned(
+          child: Container(
+            color: Colors.yellow,
+            width: 100,
+            height: 100,
+          ),
+          left: 0,
+          top: 0,
+        ),
+        Positioned(
+          child: Container(
+            color: Colors.cyanAccent,
+            width: 30,
+            height: 30,
+          ),
+          left: 30,
+          top: 50,
+        ),
+        Positioned(
+          child: Text('定位3'),
+          bottom: 0,
+          right: 30,
+        )
+      ])),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
+        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
+        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页'))
+      ]),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
       ),
+      floatingActionButtonLocation:FloatingActionButtonLocation.miniCenterDocked,
     );
   }
 }
