@@ -1,6 +1,7 @@
 import 'package:flare_splash_screen/flare_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cases/cases/clip_tabbar.dart';
 import 'package:flutter_cases/cases/custom_tabbar.dart';
 import 'package:flutter_cases/widget/custon_button.dart';
 
@@ -21,11 +22,22 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashScreen.navigate(
-        name: 'intro.flr',
-        next: (context) => MyHomePage(title: 'Flutter cases'),
-        until: () => Future.delayed(Duration(seconds: 5)),
-        startAnimation: '1',
+      home: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Container(
+                child: SplashScreen.navigate(
+                  name: 'intro.flr',
+                  next: (context) => MyHomePage(title: 'Flutter cases'),
+                  until: () => Future.delayed(Duration(seconds: 5)),
+                  startAnimation: '1',
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -54,9 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
           child: Wrap(
             direction: Axis.horizontal,
-            alignment: WrapAlignment.spaceBetween,
+//            alignment: WrapAlignment.spaceBetween,
             crossAxisAlignment: WrapCrossAlignment.start,
             runAlignment: WrapAlignment.spaceBetween,
+            spacing: 5,
             runSpacing: 5,
             verticalDirection: VerticalDirection.down,
             children: _demos(),
@@ -68,7 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _demos() {
     return [
-      CustomBtn(item: CustomTabBar(),value: '自定义tab',)
+      CustomBtn(item: CustomTabBar(),value: '自定义tab',),
+      CustomBtn(item: CliperTabbar(),value: '切割版不规则tab',)
     ];
   }
 }
