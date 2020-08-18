@@ -25,6 +25,7 @@ class _CliperTabbarState extends State<CliperTabbar> {
         title: Text('切割实现不规则TabBar'),
       ),
       body: Stack(
+        //定位
         children: [
           Positioned(
             child: pages[_currentIndex],
